@@ -1,10 +1,3 @@
-//
-//  SceneDelegate.swift
-//  QuizApp
-//
-//  Created by Lorena Lazar on 7/7/22.
-//
-
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
