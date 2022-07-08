@@ -11,7 +11,9 @@
 		C3C39E922876E1AB003726A5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C39E912876E1AB003726A5 /* SceneDelegate.swift */; };
 		C3C39E992876E1AF003726A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3C39E982876E1AF003726A5 /* Assets.xcassets */; };
 		C3C39E9C2876E1AF003726A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3C39E9A2876E1AF003726A5 /* LaunchScreen.storyboard */; };
-		C3C39EA528772F30003726A5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C39EA428772F30003726A5 /* ViewController.swift */; };
+		C3C39EA528772F30003726A5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C39EA428772F30003726A5 /* LoginViewController.swift */; };
+		C3C39EA8287811E8003726A5 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C3C39EA7287811E8003726A5 /* SnapKit */; };
+		C3C39EAA2878257A003726A5 /* InputFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C39EA92878257A003726A5 /* InputFieldView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,7 +23,8 @@
 		C3C39E982876E1AF003726A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C3C39E9B2876E1AF003726A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C3C39E9D2876E1AF003726A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C3C39EA428772F30003726A5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C3C39EA428772F30003726A5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		C3C39EA92878257A003726A5 /* InputFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFieldView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +32,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3C39EA8287811E8003726A5 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,12 +58,13 @@
 		C3C39E8E2876E1AB003726A5 /* QuizApp */ = {
 			isa = PBXGroup;
 			children = (
-				C3C39EA428772F30003726A5 /* ViewController.swift */,
+				C3C39EA428772F30003726A5 /* LoginViewController.swift */,
 				C3C39E8F2876E1AB003726A5 /* AppDelegate.swift */,
 				C3C39E912876E1AB003726A5 /* SceneDelegate.swift */,
 				C3C39E982876E1AF003726A5 /* Assets.xcassets */,
 				C3C39E9A2876E1AF003726A5 /* LaunchScreen.storyboard */,
 				C3C39E9D2876E1AF003726A5 /* Info.plist */,
+				C3C39EA92878257A003726A5 /* InputFieldView.swift */,
 			);
 			path = QuizApp;
 			sourceTree = "<group>";
@@ -81,6 +86,9 @@
 			dependencies = (
 			);
 			name = QuizApp;
+			packageProductDependencies = (
+				C3C39EA7287811E8003726A5 /* SnapKit */,
+			);
 			productName = QuizApp;
 			productReference = C3C39E8C2876E1AB003726A5 /* QuizApp.app */;
 			productType = "com.apple.product-type.application";
@@ -109,6 +117,9 @@
 				Base,
 			);
 			mainGroup = C3C39E832876E1AB003726A5;
+			packageReferences = (
+				C3C39EA6287811E8003726A5 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = C3C39E8D2876E1AB003726A5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -155,9 +166,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C3C39EA528772F30003726A5 /* ViewController.swift in Sources */,
+				C3C39EA528772F30003726A5 /* LoginViewController.swift in Sources */,
 				C3C39E902876E1AB003726A5 /* AppDelegate.swift in Sources */,
 				C3C39E922876E1AB003726A5 /* SceneDelegate.swift in Sources */,
+				C3C39EAA2878257A003726A5 /* InputFieldView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,6 +375,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C3C39EA6287811E8003726A5 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C3C39EA7287811E8003726A5 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C3C39EA6287811E8003726A5 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C3C39E842876E1AB003726A5 /* Project object */;
 }
