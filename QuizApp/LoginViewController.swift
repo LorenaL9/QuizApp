@@ -1,23 +1,53 @@
 import UIKit
+import Combine
 import SnapKit
 
 class LoginViewController: UIViewController {
 
-    private var emailText: String = ""
-    private var passwordText: String = ""
-    private var isButtonActivated: Bool = false
     private var backgroundLayer: CAGradientLayer!
     private var titleLabel: UILabel!
     private var emailInput: InputFieldView!
     private var passwordInput: InputFieldView!
     private var loginButton: UIButton!
+    private var errorLabel: UILabel!
     private var emailPasswordButtonStackView: UIStackView!
     private var scrollView: UIScrollView!
     private var contentView: UIView!
+    private var viewModel: LoginViewModel!
+    private var disposables = Set<AnyCancellable>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel = LoginViewModel()
         buildViews()
+        bindViewModel()
+    }
+
+    private func bindViewModel() {
+        viewModel
+            .$isButtonEnabled
+            .sink { isButtonEnabled in
+                if isButtonEnabled {
+                    self.loginButton.layer.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1).cgColor
+                    self.loginButton.isEnabled = true
+                } else {
+                    self.loginButton.layer.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.6).cgColor
+                    self.loginButton.isEnabled = false
+                }
+            }
+            .store(in: &disposables)
+
+        viewModel
+            .$errorMessage
+            .sink { errorMessage in
+                self.errorLabel.text = errorMessage
+                if errorMessage == "" {
+                    self.errorLabel.isHidden = true
+                } else {
+                    self.errorLabel.isHidden = false
+                }
+            }
+            .store(in: &disposables)
     }
 
     private func buildViews() {
@@ -48,6 +78,9 @@ class LoginViewController: UIViewController {
         passwordInput = InputFieldView(placeholder: "Password")
         emailPasswordButtonStackView.addArrangedSubview(passwordInput)
 
+        errorLabel = UILabel()
+        emailPasswordButtonStackView.addArrangedSubview(errorLabel)
+
         loginButton = UIButton()
         emailPasswordButtonStackView.addArrangedSubview(loginButton)
     }
@@ -75,6 +108,8 @@ class LoginViewController: UIViewController {
         emailInput.textDelegate = self
 
         passwordInput.textDelegate = self
+
+        errorLabel.textColor = .red
 
         loginButton.setTitle("Login", for: .normal)
         loginButton.layer.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.6).cgColor
@@ -116,7 +151,7 @@ class LoginViewController: UIViewController {
     }
 
     @objc func tryToLogin() {
-        print("email: \(emailText), passwoord: \(passwordText)")
+        viewModel.validateLogin()
     }
 
 }
@@ -125,20 +160,11 @@ extension LoginViewController: ActiveLoginButtonDelegate {
 
     func activate(inputFieldView: InputFieldView, text: String) {
         if inputFieldView == emailInput {
-            emailText = text
+            viewModel.emailChanged(emailNew: text)
         } else {
-            passwordText = text
+            viewModel.passwordChanged(passwordNew: text)
         }
-
-        if passwordText != "" && emailText != "" {
-            isButtonActivated = true
-            loginButton.layer.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1).cgColor
-            loginButton.isEnabled = true
-        } else {
-            isButtonActivated = false
-            loginButton.layer.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.6).cgColor
-            loginButton.isEnabled = false
-        }
+        errorLabel.isHidden = true
     }
 
 }

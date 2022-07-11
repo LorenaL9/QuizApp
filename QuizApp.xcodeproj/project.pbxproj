@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C354B509287C0D4E000869CC /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C354B508287C0D4E000869CC /* LoginViewModel.swift */; };
 		C3C39E902876E1AB003726A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C39E8F2876E1AB003726A5 /* AppDelegate.swift */; };
 		C3C39E922876E1AB003726A5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C39E912876E1AB003726A5 /* SceneDelegate.swift */; };
 		C3C39E992876E1AF003726A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3C39E982876E1AF003726A5 /* Assets.xcassets */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C354B508287C0D4E000869CC /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		C3C39E8C2876E1AB003726A5 /* QuizApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuizApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3C39E8F2876E1AB003726A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C3C39E912876E1AB003726A5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -58,13 +60,14 @@
 		C3C39E8E2876E1AB003726A5 /* QuizApp */ = {
 			isa = PBXGroup;
 			children = (
-				C3C39EA428772F30003726A5 /* LoginViewController.swift */,
 				C3C39E8F2876E1AB003726A5 /* AppDelegate.swift */,
 				C3C39E912876E1AB003726A5 /* SceneDelegate.swift */,
 				C3C39E982876E1AF003726A5 /* Assets.xcassets */,
 				C3C39E9A2876E1AF003726A5 /* LaunchScreen.storyboard */,
 				C3C39E9D2876E1AF003726A5 /* Info.plist */,
+				C3C39EA428772F30003726A5 /* LoginViewController.swift */,
 				C3C39EA92878257A003726A5 /* InputFieldView.swift */,
+				C354B508287C0D4E000869CC /* LoginViewModel.swift */,
 			);
 			path = QuizApp;
 			sourceTree = "<group>";
@@ -166,6 +169,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C354B509287C0D4E000869CC /* LoginViewModel.swift in Sources */,
 				C3C39EA528772F30003726A5 /* LoginViewController.swift in Sources */,
 				C3C39E902876E1AB003726A5 /* AppDelegate.swift in Sources */,
 				C3C39E922876E1AB003726A5 /* SceneDelegate.swift in Sources */,
@@ -237,7 +241,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -291,7 +295,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

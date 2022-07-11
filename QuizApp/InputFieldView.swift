@@ -52,6 +52,7 @@ class InputFieldView: UIView {
         )
         textInput.textColor = .white
         textInput.tintColor = .white
+        textInput.autocapitalizationType = .none
 
         showPasswordButton.setImage(UIImage(systemName: "eye.fill"), for: .normal)
         showPasswordButton.tintColor = .white
