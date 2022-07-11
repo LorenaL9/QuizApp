@@ -15,6 +15,13 @@ class LoginViewController: UIViewController {
     private var contentView: UIView!
     private var viewModel: LoginViewModel!
     private var disposables = Set<AnyCancellable>()
+    private var router: AppRouterProtocol!
+
+    convenience init(router: AppRouterProtocol) {
+        self.init()
+
+        self.router = router
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
