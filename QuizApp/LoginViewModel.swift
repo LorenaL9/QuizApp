@@ -18,8 +18,14 @@ class LoginViewModel {
         activateButton()
     }
 
-    func validateLogin() {
-        errorMessage = "Incorrect email or password"
+    func validateLogin() async {
+        do {
+            let token = try await NetworkClient.accessToken(password: password, username: email)
+            print("\(token)")
+        } catch {
+            errorMessage = "Incorrect email or password"
+            print("ERROR: \(error)")
+        }
     }
 
     private func activateButton() {

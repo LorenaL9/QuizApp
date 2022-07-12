@@ -157,8 +157,8 @@ class LoginViewController: UIViewController {
         }
     }
 
-    @objc func tryToLogin() {
-        viewModel.validateLogin()
+    @objc func tryToLogin() async {
+        await viewModel.validateLogin()
     }
 
 }
