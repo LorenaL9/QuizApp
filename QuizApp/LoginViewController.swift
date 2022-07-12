@@ -26,26 +26,23 @@ class LoginViewController: UIViewController {
     private func bindViewModel() {
         viewModel
             .$isButtonEnabled
-            .sink { isButtonEnabled in
-                if isButtonEnabled {
-                    self.loginButton.layer.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1).cgColor
-                    self.loginButton.isEnabled = true
-                } else {
-                    self.loginButton.layer.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.6).cgColor
-                    self.loginButton.isEnabled = false
-                }
+            .sink { [weak self] isButtonEnabled in
+                guard let self = self else { return }
+
+                self.loginButton.layer.backgroundColor = isButtonEnabled
+                    ? UIColor(red: 1, green: 1, blue: 1, alpha: 1).cgColor
+                    : UIColor(red: 1, green: 1, blue: 1, alpha: 0.6).cgColor
+                self.loginButton.isEnabled = isButtonEnabled ? true : false
             }
             .store(in: &disposables)
 
         viewModel
             .$errorMessage
-            .sink { errorMessage in
+            .sink { [weak self] errorMessage in
+                guard let self = self else { return }
+
                 self.errorLabel.text = errorMessage
-                if errorMessage == "" {
-                    self.errorLabel.isHidden = true
-                } else {
-                    self.errorLabel.isHidden = false
-                }
+                self.errorLabel.isHidden = errorMessage == "" ? true : false
             }
             .store(in: &disposables)
     }
@@ -160,9 +157,9 @@ extension LoginViewController: ActiveLoginButtonDelegate {
 
     func activate(inputFieldView: InputFieldView, text: String) {
         if inputFieldView == emailInput {
-            viewModel.emailChanged(emailNew: text)
+            viewModel.emailChanged(newEmail: text)
         } else {
-            viewModel.passwordChanged(passwordNew: text)
+            viewModel.passwordChanged(newPassword: text)
         }
         errorLabel.isHidden = true
     }
