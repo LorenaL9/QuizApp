@@ -1,37 +1,49 @@
 import UIKit
 import SnapKit
 
-protocol ActiveLoginButtonDelegate: AnyObject {
+protocol CustomTextFieldDelegate: AnyObject {
 
-    func activate(inputFieldView: InputFieldView, text: String)
+    func saveInputAndEnableLogin(loginInputView: LoginInputView, text: String)
 
 }
 
-class InputFieldView: UIView {
+class LoginInputView: UIView {
 
-    weak var textDelegate: ActiveLoginButtonDelegate?
+    weak var textDelegate: CustomTextFieldDelegate?
 
     private var textInput: UITextField!
     private var placeholder: String
     private var showPasswordButton: UIButton!
+    private var customTextFieldType: CustomTextFieldType!
 
-    init(placeholder: String) {
+    init(placeholder: String, customTextFieldType: CustomTextFieldType) {
         self.placeholder = placeholder
+        self.customTextFieldType = customTextFieldType
         super.init(frame: .zero)
-        buildViews()
+        createViews()
+        styleViews()
+        defineLayoutForViews()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func buildViews() {
-        createViews()
-        styleViews()
-        defineLayoutForViews()
+    @objc func showPassword() {
+        if textInput.isSecureTextEntry {
+            textInput.isSecureTextEntry = false
+            showPasswordButton.setImage(UIImage(systemName: "eye.slash.fill"), for: .normal)
+        } else {
+            textInput.isSecureTextEntry = true
+            showPasswordButton.setImage(UIImage(systemName: "eye.fill"), for: .normal)
+        }
     }
 
-    private func createViews() {
+}
+
+extension LoginInputView: ConstructViewsProtocol {
+
+    func createViews() {
         textInput = UITextField()
         addSubview(textInput)
         textInput.delegate = self
@@ -41,7 +53,7 @@ class InputFieldView: UIView {
         addSubview(showPasswordButton)
     }
 
-    private func styleViews() {
+    func styleViews() {
         layer.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.3).cgColor
         layer.cornerRadius = 20
         layer.borderColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1).cgColor
@@ -58,12 +70,12 @@ class InputFieldView: UIView {
         showPasswordButton.tintColor = .white
         showPasswordButton.isHidden = true
 
-        if placeholder == "Password" {
+        if customTextFieldType == .password {
             textInput.isSecureTextEntry = true
         }
     }
 
-    private func defineLayoutForViews() {
+    func defineLayoutForViews() {
         textInput.snp.makeConstraints {
             $0.top.bottom.equalToSuperview().inset(10)
             $0.leading.equalToSuperview().inset(20)
@@ -77,19 +89,9 @@ class InputFieldView: UIView {
         }
     }
 
-    @objc func showPassword() {
-        if textInput.isSecureTextEntry {
-            textInput.isSecureTextEntry = false
-            showPasswordButton.setImage(UIImage(systemName: "eye.slash.fill"), for: .normal)
-        } else {
-            textInput.isSecureTextEntry = true
-            showPasswordButton.setImage(UIImage(systemName: "eye.fill"), for: .normal)
-        }
-    }
-
 }
 
-extension InputFieldView: UITextFieldDelegate {
+extension LoginInputView: UITextFieldDelegate {
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
         layer.borderWidth = 1
@@ -100,7 +102,7 @@ extension InputFieldView: UITextFieldDelegate {
     }
 
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        if placeholder == "Password" {
+        if customTextFieldType == .password {
             if textInput.text == "" {
                 showPasswordButton.isHidden = true
             } else {
@@ -108,7 +110,7 @@ extension InputFieldView: UITextFieldDelegate {
             }
         }
 
-        textDelegate?.activate(inputFieldView: self, text: textInput.text ?? "")
+        textDelegate?.saveInputAndEnableLogin(loginInputView: self, text: textInput.text ?? "")
     }
 
 }
