@@ -32,9 +32,9 @@ class LoginInputView: UIView {
     @objc func toggleSecureEntry() {
         textInput.isSecureTextEntry = !textInput.isSecureTextEntry
 
-        let image = textInput.isSecureTextEntry
-            ? UIImage(systemName: "eye.fill")
-            : UIImage(systemName: "eye.slash.fill")
+        let image = textInput.isSecureTextEntry ?
+            UIImage(systemName: "eye.fill") :
+            UIImage(systemName: "eye.slash.fill")
         showPasswordButton.setImage(image, for: .normal)
     }
 

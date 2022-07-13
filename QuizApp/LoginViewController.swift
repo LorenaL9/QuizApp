@@ -29,10 +29,9 @@ class LoginViewController: UIViewController {
             .sink { [weak self] isButtonEnabled in
                 guard let self = self else { return }
 
-                self.loginButton.layer.backgroundColor = isButtonEnabled
-                    ? UIColor(red: 1, green: 1, blue: 1, alpha: 1).cgColor
-                    : UIColor(red: 1, green: 1, blue: 1, alpha: 0.6).cgColor
-                self.loginButton.isEnabled = isButtonEnabled ? true : false
+                let alpha = isButtonEnabled ? 1 : 0.6
+                self.loginButton.layer.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: alpha).cgColor
+                self.loginButton.isEnabled = isButtonEnabled
             }
             .store(in: &disposables)
 
@@ -42,7 +41,7 @@ class LoginViewController: UIViewController {
                 guard let self = self else { return }
 
                 self.errorLabel.text = errorMessage
-                self.errorLabel.isHidden = errorMessage == "" ? true : false
+                self.errorLabel.isHidden = errorMessage.isEmpty
             }
             .store(in: &disposables)
     }
