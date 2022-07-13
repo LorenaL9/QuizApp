@@ -4,6 +4,9 @@ import SnapKit
 
 class LoginViewController: UIViewController {
 
+    private var emailText: String = ""
+    private var passwordText: String = ""
+    private var isButtonActivated: Bool = false
     private var backgroundLayer: CAGradientLayer!
     private var titleLabel: UILabel!
     private var emailInput: LoginInputView!
@@ -19,7 +22,9 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel = LoginViewModel()
-        buildViews()
+        createViews()
+        styleViews()
+        defineLayoutForViews()
         bindViewModel()
     }
 
@@ -44,12 +49,6 @@ class LoginViewController: UIViewController {
                 self.errorLabel.isHidden = errorMessage.isEmpty
             }
             .store(in: &disposables)
-    }
-
-    private func buildViews() {
-        createViews()
-        styleViews()
-        defineLayoutForViews()
     }
 
     @objc func tryToLogin() {
