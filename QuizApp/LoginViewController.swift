@@ -19,14 +19,15 @@ class LoginViewController: UIViewController {
 
     convenience init(router: AppRouterProtocol) {
         self.init()
-
         self.router = router
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel = LoginViewModel()
-        buildViews()
+        createViews()
+        styleViews()
+        defineLayoutForViews()
         bindViewModel()
     }
 
@@ -36,10 +37,9 @@ class LoginViewController: UIViewController {
             .sink { [weak self] isButtonEnabled in
                 guard let self = self else { return }
 
-                self.loginButton.layer.backgroundColor = isButtonEnabled
-                    ? UIColor(red: 1, green: 1, blue: 1, alpha: 1).cgColor
-                    : UIColor(red: 1, green: 1, blue: 1, alpha: 0.6).cgColor
-                self.loginButton.isEnabled = isButtonEnabled ? true : false
+                let alpha = isButtonEnabled ? 1 : 0.6
+                self.loginButton.layer.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: alpha).cgColor
+                self.loginButton.isEnabled = isButtonEnabled
             }
             .store(in: &disposables)
 
@@ -49,15 +49,9 @@ class LoginViewController: UIViewController {
                 guard let self = self else { return }
 
                 self.errorLabel.text = errorMessage
-                self.errorLabel.isHidden = errorMessage == "" ? true : false
+                self.errorLabel.isHidden = errorMessage.isEmpty
             }
             .store(in: &disposables)
-    }
-
-    private func buildViews() {
-        createViews()
-        styleViews()
-        defineLayoutForViews()
     }
 
     @objc func tryToLogin() {
@@ -166,11 +160,19 @@ extension LoginViewController: ConstructViewsProtocol {
 
 extension LoginViewController: CustomTextFieldDelegate {
 
-    func saveInputAndEnableLogin(loginInputView: LoginInputView, text: String) {
-        if loginInputView == emailInput {
-            viewModel.emailChanged(newEmail: text)
-        } else {
+    func textFieldDidChange(textField: UIView, text: String?) {
+        guard
+            let textField = textField as? LoginInputView,
+            let text = text
+        else { return }
+
+        switch textField.customTextFieldType {
+        case .password:
             viewModel.passwordChanged(newPassword: text)
+        case .email:
+            viewModel.emailChanged(newEmail: text)
+        default:
+            return
         }
         errorLabel.isHidden = true
     }

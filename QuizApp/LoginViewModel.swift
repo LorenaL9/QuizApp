@@ -8,6 +8,16 @@ class LoginViewModel {
     private var email: String = ""
     private var password: String = ""
 
+    private var isValidEmail: Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPred = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
+        return emailPred.evaluate(with: email)
+    }
+
+    private var isValidPassword: Bool {
+        password.count >= 8
+    }
+
     func emailChanged(newEmail: String) {
         email = newEmail
         activateButton()
@@ -23,18 +33,8 @@ class LoginViewModel {
     }
 
     private func activateButton() {
-        let isValid = getEmailValidation() && getPasswordValidatioon()
+        let isValid = isValidEmail && isValidPassword
         isButtonEnabled = isValid ? true : false
-    }
-
-    private func getEmailValidation() -> Bool {
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        let emailPred = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
-        return emailPred.evaluate(with: email)
-    }
-
-    private func getPasswordValidatioon() -> Bool {
-        password.count >= 8
     }
 
 }
