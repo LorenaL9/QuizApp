@@ -3,7 +3,7 @@ import SnapKit
 
 protocol CustomTextFieldDelegate: AnyObject {
 
-    func saveInputAndEnableLogin(loginInputView: LoginInputView, text: String)
+    func textFieldDidChange(textField: UIView, text: String?)
 
 }
 
@@ -14,7 +14,7 @@ class LoginInputView: UIView {
     private var textInput: UITextField!
     private var placeholder: String
     private var showPasswordButton: UIButton!
-    private var customTextFieldType: CustomTextFieldType!
+    private(set) var customTextFieldType: CustomTextFieldType!
 
     init(placeholder: String, customTextFieldType: CustomTextFieldType) {
         self.placeholder = placeholder
@@ -29,14 +29,13 @@ class LoginInputView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    @objc func showPassword() {
-        if textInput.isSecureTextEntry {
-            textInput.isSecureTextEntry = false
-            showPasswordButton.setImage(UIImage(systemName: "eye.slash.fill"), for: .normal)
-        } else {
-            textInput.isSecureTextEntry = true
-            showPasswordButton.setImage(UIImage(systemName: "eye.fill"), for: .normal)
-        }
+    @objc func toggleSecureEntry() {
+        textInput.isSecureTextEntry = !textInput.isSecureTextEntry
+
+        let image = textInput.isSecureTextEntry
+            ? UIImage(systemName: "eye.fill")
+            : UIImage(systemName: "eye.slash.fill")
+        showPasswordButton.setImage(image, for: .normal)
     }
 
 }
@@ -49,7 +48,7 @@ extension LoginInputView: ConstructViewsProtocol {
         textInput.delegate = self
 
         showPasswordButton = UIButton()
-        showPasswordButton.addTarget(self, action: #selector(showPassword), for: .touchUpInside)
+        showPasswordButton.addTarget(self, action: #selector(toggleSecureEntry), for: .touchUpInside)
         addSubview(showPasswordButton)
     }
 
@@ -102,14 +101,14 @@ extension LoginInputView: UITextFieldDelegate {
 
     func textFieldDidChangeSelection(_ textField: UITextField) {
         if customTextFieldType == .password {
-            if textInput.text == "" {
-                showPasswordButton.isHidden = true
-            } else {
-                showPasswordButton.isHidden = false
+            if customTextFieldType == .password {
+                guard let text = textField.text else { return }
+
+                showPasswordButton.isHidden = text.isEmpty
             }
         }
 
-        textDelegate?.saveInputAndEnableLogin(loginInputView: self, text: textInput.text ?? "")
+        textDelegate?.textFieldDidChange(textField: self, text: textField.text)
     }
 
 }
