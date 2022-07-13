@@ -1,4 +1,5 @@
 import UIKit
+import Combine
 import SnapKit
 
 class LoginViewController: UIViewController {
@@ -11,19 +12,47 @@ class LoginViewController: UIViewController {
     private var emailInput: LoginInputView!
     private var passwordInput: LoginInputView!
     private var loginButton: UIButton!
+    private var errorLabel: UILabel!
     private var emailPasswordButtonStackView: UIStackView!
     private var scrollView: UIScrollView!
     private var contentView: UIView!
+    private var viewModel: LoginViewModel!
+    private var disposables = Set<AnyCancellable>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel = LoginViewModel()
         createViews()
         styleViews()
         defineLayoutForViews()
+        bindViewModel()
+    }
+
+    private func bindViewModel() {
+        viewModel
+            .$isButtonEnabled
+            .sink { [weak self] isButtonEnabled in
+                guard let self = self else { return }
+
+                let alpha = isButtonEnabled ? 1 : 0.6
+                self.loginButton.layer.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: alpha).cgColor
+                self.loginButton.isEnabled = isButtonEnabled
+            }
+            .store(in: &disposables)
+
+        viewModel
+            .$errorMessage
+            .sink { [weak self] errorMessage in
+                guard let self = self else { return }
+
+                self.errorLabel.text = errorMessage
+                self.errorLabel.isHidden = errorMessage.isEmpty
+            }
+            .store(in: &disposables)
     }
 
     @objc func tryToLogin() {
-        print("email: \(emailText), passwoord: \(passwordText)")
+        viewModel.validateLogin()
     }
 
 }
@@ -52,6 +81,9 @@ extension LoginViewController: ConstructViewsProtocol {
         passwordInput = LoginInputView(placeholder: "Password", customTextFieldType: .password)
         emailPasswordButtonStackView.addArrangedSubview(passwordInput)
 
+        errorLabel = UILabel()
+        emailPasswordButtonStackView.addArrangedSubview(errorLabel)
+
         loginButton = UIButton()
         emailPasswordButtonStackView.addArrangedSubview(loginButton)
     }
@@ -79,6 +111,8 @@ extension LoginViewController: ConstructViewsProtocol {
         emailInput.textDelegate = self
 
         passwordInput.textDelegate = self
+
+        errorLabel.textColor = .red
 
         loginButton.setTitle("Login", for: .normal)
         loginButton.layer.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.6).cgColor
@@ -131,22 +165,13 @@ extension LoginViewController: CustomTextFieldDelegate {
 
         switch textField.customTextFieldType {
         case .password:
-            passwordText = text
+            viewModel.passwordChanged(newPassword: text)
         case .email:
-            emailText = text
+            viewModel.emailChanged(newEmail: text)
         default:
             return
         }
-
-        if passwordText != "" && emailText != "" {
-            isButtonActivated = true
-            loginButton.layer.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1).cgColor
-            loginButton.isEnabled = true
-        } else {
-            isButtonActivated = false
-            loginButton.layer.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.6).cgColor
-            loginButton.isEnabled = false
-        }
+        errorLabel.isHidden = true
     }
 
 }
