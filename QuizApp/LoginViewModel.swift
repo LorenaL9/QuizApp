@@ -7,6 +7,7 @@ class LoginViewModel {
 
     private var email: String = ""
     private var password: String = ""
+    private var router: AppRouterProtocol!
 
     private var isValidEmail: Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
@@ -16,6 +17,11 @@ class LoginViewModel {
 
     private var isValidPassword: Bool {
         password.count >= 8
+    }
+
+    convenience init(router: AppRouterProtocol) {
+        self.init()
+        self.router = router
     }
 
     func emailChanged(newEmail: String) {
