@@ -18,13 +18,16 @@ class LoginViewModel {
         activateButton()
     }
 
-    func validateLogin() async {
-        do {
-            let token = try await NetworkClient.accessToken(password: password, username: email)
-            print("\(token)")
-        } catch {
-            errorMessage = "Incorrect email or password"
-            print("ERROR: \(error)")
+    @MainActor
+    func validateLogin() {
+        Task {
+            do {
+                let token = try await NetworkClient.fetchAccessToken(password: password, username: email)
+                print("\(token)")
+            } catch {
+                errorMessage = "Incorrect email or password"
+                print("ERROR: \(error)")
+            }
         }
     }
 
@@ -43,7 +46,7 @@ class LoginViewModel {
     }
 
     private func isValidPassword() -> Bool {
-        password.count >= 8
+        password.count >= 6
     }
 
 }
