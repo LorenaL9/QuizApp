@@ -1,4 +1,4 @@
-public enum CustomTextFieldType {
+enum CustomTextFieldType {
 
     case password
     case email

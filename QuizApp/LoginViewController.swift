@@ -159,11 +159,19 @@ extension LoginViewController: ConstructViewsProtocol {
 
 extension LoginViewController: CustomTextFieldDelegate {
 
-    func saveInputAndEnableLogin(loginInputView: LoginInputView, text: String) {
-        if loginInputView == emailInput {
-            viewModel.emailChanged(newEmail: text)
-        } else {
+    func textFieldDidChange(textField: UIView, text: String?) {
+        guard
+            let textField = textField as? LoginInputView,
+            let text = text
+        else { return }
+
+        switch textField.customTextFieldType {
+        case .password:
             viewModel.passwordChanged(newPassword: text)
+        case .email:
+            viewModel.emailChanged(newEmail: text)
+        default:
+            return
         }
         errorLabel.isHidden = true
     }
