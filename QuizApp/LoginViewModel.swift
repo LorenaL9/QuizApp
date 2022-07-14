@@ -7,14 +7,30 @@ class LoginViewModel {
 
     private var email: String = ""
     private var password: String = ""
+    private var router: AppRouterProtocol!
 
-    func emailChanged(emailNew: String) {
-        email = emailNew
+    private var isValidEmail: Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPred = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
+        return emailPred.evaluate(with: email)
+    }
+
+    private var isValidPassword: Bool {
+        password.count >= 6
+    }
+
+    convenience init(router: AppRouterProtocol) {
+        self.init()
+        self.router = router
+    }
+
+    func emailChanged(newEmail: String) {
+        email = newEmail
         activateButton()
     }
 
-    func passwordChanged(passwordNew: String) {
-        password = passwordNew
+    func passwordChanged(newPassword: String) {
+        password = newPassword
         activateButton()
     }
 
@@ -32,21 +48,8 @@ class LoginViewModel {
     }
 
     private func activateButton() {
-        if isValidEmail() && isValidPassword() {
-            isButtonEnabled = true
-        } else {
-            isButtonEnabled = false
-        }
-    }
-
-    private func isValidEmail() -> Bool {
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        let emailPred = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
-        return emailPred.evaluate(with: email)
-    }
-
-    private func isValidPassword() -> Bool {
-        password.count >= 6
+        let isValid = isValidEmail && isValidPassword
+        isButtonEnabled = isValid ? true : false
     }
 
 }

@@ -6,8 +6,8 @@ class LoginViewController: UIViewController {
 
     private var backgroundLayer: CAGradientLayer!
     private var titleLabel: UILabel!
-    private var emailInput: InputFieldView!
-    private var passwordInput: InputFieldView!
+    private var emailInput: LoginInputView!
+    private var passwordInput: LoginInputView!
     private var loginButton: UIButton!
     private var errorLabel: UILabel!
     private var emailPasswordButtonStackView: UIStackView!
@@ -15,55 +15,52 @@ class LoginViewController: UIViewController {
     private var contentView: UIView!
     private var viewModel: LoginViewModel!
     private var disposables = Set<AnyCancellable>()
-    private var router: AppRouterProtocol!
 
-    convenience init(router: AppRouterProtocol) {
+    convenience init(viewModel: LoginViewModel) {
         self.init()
-
-        self.router = router
+        self.viewModel = viewModel
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = LoginViewModel()
-        buildViews()
+        createViews()
+        styleViews()
+        defineLayoutForViews()
         bindViewModel()
     }
 
     private func bindViewModel() {
         viewModel
             .$isButtonEnabled
-            .sink { isButtonEnabled in
-                if isButtonEnabled {
-                    self.loginButton.layer.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1).cgColor
-                    self.loginButton.isEnabled = true
-                } else {
-                    self.loginButton.layer.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.6).cgColor
-                    self.loginButton.isEnabled = false
-                }
+            .sink { [weak self] isButtonEnabled in
+                guard let self = self else { return }
+
+                let alpha = isButtonEnabled ? 1 : 0.6
+                self.loginButton.layer.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: alpha).cgColor
+                self.loginButton.isEnabled = isButtonEnabled
             }
             .store(in: &disposables)
 
         viewModel
             .$errorMessage
-            .sink { errorMessage in
+            .sink { [weak self] errorMessage in
+                guard let self = self else { return }
+
                 self.errorLabel.text = errorMessage
-                if errorMessage == "" {
-                    self.errorLabel.isHidden = true
-                } else {
-                    self.errorLabel.isHidden = false
-                }
+                self.errorLabel.isHidden = errorMessage.isEmpty
             }
             .store(in: &disposables)
     }
 
-    private func buildViews() {
-        createViews()
-        styleViews()
-        defineLayoutForViews()
+    @objc func tryToLogin() {
+        viewModel.validateLogin()
     }
 
-    private func createViews() {
+}
+
+extension LoginViewController: ConstructViewsProtocol {
+
+    func createViews() {
         backgroundLayer = CAGradientLayer()
         view.layer.addSublayer(backgroundLayer)
 
@@ -79,10 +76,10 @@ class LoginViewController: UIViewController {
         emailPasswordButtonStackView = UIStackView()
         contentView.addSubview(emailPasswordButtonStackView)
 
-        emailInput = InputFieldView(placeholder: "Email")
+        emailInput = LoginInputView(placeholder: "Email", customTextFieldType: .email)
         emailPasswordButtonStackView.addArrangedSubview(emailInput)
 
-        passwordInput = InputFieldView(placeholder: "Password")
+        passwordInput = LoginInputView(placeholder: "Password", customTextFieldType: .password)
         emailPasswordButtonStackView.addArrangedSubview(passwordInput)
 
         errorLabel = UILabel()
@@ -92,7 +89,7 @@ class LoginViewController: UIViewController {
         emailPasswordButtonStackView.addArrangedSubview(loginButton)
     }
 
-    private func styleViews() {
+    func styleViews() {
         backgroundLayer.colors = [
           UIColor(red: 0.453, green: 0.308, blue: 0.637, alpha: 1).cgColor,
           UIColor(red: 0.154, green: 0.185, blue: 0.463, alpha: 1).cgColor
@@ -130,7 +127,7 @@ class LoginViewController: UIViewController {
         emailPasswordButtonStackView.spacing = 18
     }
 
-    private func defineLayoutForViews() {
+    func defineLayoutForViews() {
         scrollView.snp.makeConstraints {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
@@ -157,19 +154,23 @@ class LoginViewController: UIViewController {
         }
     }
 
-    @objc func tryToLogin() {
-        viewModel.validateLogin()
-    }
-
 }
 
-extension LoginViewController: ActiveLoginButtonDelegate {
+extension LoginViewController: CustomTextFieldDelegate {
 
-    func activate(inputFieldView: InputFieldView, text: String) {
-        if inputFieldView == emailInput {
-            viewModel.emailChanged(emailNew: text)
-        } else {
-            viewModel.passwordChanged(passwordNew: text)
+    func textFieldDidChange(textField: UIView, text: String?) {
+        guard
+            let textField = textField as? LoginInputView,
+            let text = text
+        else { return }
+
+        switch textField.customTextFieldType {
+        case .password:
+            viewModel.passwordChanged(newPassword: text)
+        case .email:
+            viewModel.emailChanged(newEmail: text)
+        default:
+            return
         }
         errorLabel.isHidden = true
     }
