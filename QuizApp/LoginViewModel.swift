@@ -23,12 +23,23 @@ class LoginViewModel {
         Task {
             do {
                 let token = try await NetworkClient.fetchAccessToken(password: password, username: email)
-                print("\(token)")
+                print("\(token.accessToken)")
+                KeychainService.saveAccessToken(token: token.accessToken, service: "access-token")
             } catch {
                 errorMessage = "Incorrect email or password"
                 print("ERROR: \(error)")
             }
         }
+    }
+
+    func getAccessToken() -> Bool {
+//        KeychainService.delete(service: "access-token")
+        guard
+            let data = KeychainService.getAccessToken(service: "access-token")
+        else { return false }
+
+        print(data)
+        return true
     }
 
     private func activateButton() {
