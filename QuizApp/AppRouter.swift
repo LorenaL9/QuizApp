@@ -9,13 +9,15 @@ protocol AppRouterProtocol {
 class AppRouter: AppRouterProtocol {
 
     private let navigationController: UINavigationController!
+    private let appDependencies: AppDependencies!
 
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
+        self.appDependencies = AppDependencies()
     }
 
     func showLogIn() {
-        let viewModel = LoginViewModel(router: self)
+        let viewModel = LoginViewModel(router: self, userClient: appDependencies.userClient)
         let logInViewController = LoginViewController(viewModel: viewModel)
 
         navigationController.pushViewController(logInViewController, animated: false)
