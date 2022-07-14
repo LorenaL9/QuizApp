@@ -15,7 +15,8 @@ class AppRouter: AppRouterProtocol {
     }
 
     func showLogIn() {
-        let logInViewController = LoginViewController(router: self)
+        let viewModel = LoginViewModel(router: self)
+        let logInViewController = LoginViewController(viewModel: viewModel)
 
         navigationController.pushViewController(logInViewController, animated: false)
         navigationController.navigationBar.isHidden = true
