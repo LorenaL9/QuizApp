@@ -4,9 +4,6 @@ import SnapKit
 
 class LoginViewController: UIViewController {
 
-    private var emailText: String = ""
-    private var passwordText: String = ""
-    private var isButtonActivated: Bool = false
     private var backgroundLayer: CAGradientLayer!
     private var titleLabel: UILabel!
     private var emailInput: LoginInputView!
@@ -19,9 +16,13 @@ class LoginViewController: UIViewController {
     private var viewModel: LoginViewModel!
     private var disposables = Set<AnyCancellable>()
 
+    convenience init(viewModel: LoginViewModel) {
+        self.init()
+        self.viewModel = viewModel
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = LoginViewModel()
         createViews()
         styleViews()
         defineLayoutForViews()

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C354B509287C0D4E000869CC /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C354B508287C0D4E000869CC /* LoginViewModel.swift */; };
+		C354B50B287C5CB2000869CC /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C354B50A287C5CB2000869CC /* AppRouter.swift */; };
 		C354B513287D9C0E000869CC /* CustomTextFieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C354B512287D9C0E000869CC /* CustomTextFieldType.swift */; };
 		C354B515287D9FCA000869CC /* ConstructViewsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C354B514287D9FCA000869CC /* ConstructViewsProtocol.swift */; };
 		C3C39E902876E1AB003726A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C39E8F2876E1AB003726A5 /* AppDelegate.swift */; };
@@ -21,6 +22,7 @@
 
 /* Begin PBXFileReference section */
 		C354B508287C0D4E000869CC /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		C354B50A287C5CB2000869CC /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		C354B512287D9C0E000869CC /* CustomTextFieldType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldType.swift; sourceTree = "<group>"; };
 		C354B514287D9FCA000869CC /* ConstructViewsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructViewsProtocol.swift; sourceTree = "<group>"; };
 		C3C39E8C2876E1AB003726A5 /* QuizApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuizApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -50,7 +52,7 @@
 			children = (
 				C3C39E8E2876E1AB003726A5 /* QuizApp */,
 				C3C39E8D2876E1AB003726A5 /* Products */,
-			);
+			); 
 			sourceTree = "<group>";
 		};
 		C3C39E8D2876E1AB003726A5 /* Products */ = {
@@ -71,6 +73,7 @@
 				C3C39E9D2876E1AF003726A5 /* Info.plist */,
 				C3C39EA428772F30003726A5 /* LoginViewController.swift */,
 				C354B508287C0D4E000869CC /* LoginViewModel.swift */,
+				C354B50A287C5CB2000869CC /* AppRouter.swift */,
 				C3C39EA92878257A003726A5 /* LoginInputView.swift */,
 				C354B512287D9C0E000869CC /* CustomTextFieldType.swift */,
 				C354B514287D9FCA000869CC /* ConstructViewsProtocol.swift */,
@@ -178,6 +181,7 @@
 				C354B509287C0D4E000869CC /* LoginViewModel.swift in Sources */,
 				C354B515287D9FCA000869CC /* ConstructViewsProtocol.swift in Sources */,
 				C3C39EA528772F30003726A5 /* LoginViewController.swift in Sources */,
+				C354B50B287C5CB2000869CC /* AppRouter.swift in Sources */,
 				C354B513287D9C0E000869CC /* CustomTextFieldType.swift in Sources */,
 				C3C39E902876E1AB003726A5 /* AppDelegate.swift in Sources */,
 				C3C39E922876E1AB003726A5 /* SceneDelegate.swift in Sources */,
