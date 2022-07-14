@@ -1,8 +1,8 @@
 import UIKit
 
-class NetworkClient: NetworkClientProtocol {
+class UserClient: UserClientProtocol {
 
-    static func fetchAccessToken(password: String, username: String) async throws -> LoginResponse {
+    func fetchAccessToken(password: String, username: String) async throws -> LoginResponse {
         guard
             let url = URL(string: "https://five-ios-quiz-app.herokuapp.com/api/v1/login/")
         else {

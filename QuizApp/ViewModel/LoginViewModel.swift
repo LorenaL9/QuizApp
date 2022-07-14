@@ -8,6 +8,7 @@ class LoginViewModel {
     private var email: String = ""
     private var password: String = ""
     private var router: AppRouterProtocol!
+    private var userClient: UserClientProtocol!
 
     private var isValidEmail: Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
@@ -19,9 +20,9 @@ class LoginViewModel {
         password.count >= 6
     }
 
-    convenience init(router: AppRouterProtocol) {
-        self.init()
+    init(router: AppRouterProtocol, userClient: UserClientProtocol) {
         self.router = router
+        self.userClient = userClient
     }
 
     func emailChanged(newEmail: String) {
@@ -38,7 +39,7 @@ class LoginViewModel {
     func validateLogin() {
         Task {
             do {
-                let token = try await NetworkClient.fetchAccessToken(password: password, username: email)
+                let token = try await userClient.fetchAccessToken(password: password, username: email)
                 print("\(token)")
             } catch {
                 errorMessage = "Incorrect email or password"
