@@ -49,7 +49,7 @@ class LoginViewModel {
 
     private func activateButton() {
         let isValid = isValidEmail && isValidPassword
-        isButtonEnabled = isValid ? true : false
+        isButtonEnabled = isValid
     }
 
 }
