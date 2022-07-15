@@ -23,8 +23,14 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let isExistAccessToken = viewModel.getAccessToken()
-        print(isExistAccessToken)
+        Task {
+            do {
+                let isExistAccessToken = try await viewModel.getAccessToken()
+                print(isExistAccessToken)
+            } catch {
+                print("false")
+            }
+        }
         createViews()
         styleViews()
         defineLayoutForViews()

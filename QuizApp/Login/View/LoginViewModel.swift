@@ -50,10 +50,33 @@ class LoginViewModel {
         }
     }
 
-    func getAccessToken() -> Bool {
-        let data = keychainService.getAccessToken(key: AccessToken.user.rawValue)
-        return data != nil
+    func getAccessToken() async throws -> Bool {
+        guard
+            let token: String = keychainService.getAccessToken(key: AccessToken.user.rawValue)
+        else { return false }
+
+        guard
+            try await userClient.checkAccessToken(data: token)
+        else { return false }
+
+        return true
     }
+
+//    func getAccessToken() -> Bool {
+//        guard
+//            let token: String = keychainService.getAccessToken(key: AccessToken.user.rawValue)
+//        else { return false }
+//
+//        Task {
+//            do {
+//                let isValidToken = try await userClient.checkAccessToken(data: token)
+//                print("token is valid: \(isValidToken)")
+//            } catch {
+//                print("ERROR: \(error)")
+//            }
+//        }
+//        return token != nil
+//    }
 
     private func activateButton() {
         let isValid = isValidEmail && isValidPassword

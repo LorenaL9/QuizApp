@@ -11,6 +11,7 @@
 		C3157318288151F900C911D0 /* Keychain in Frameworks */ = {isa = PBXBuildFile; productRef = C3157317288151F900C911D0 /* Keychain */; };
 		C315731A2881543900C911D0 /* KeychainServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31573192881543900C911D0 /* KeychainServiceProtocol.swift */; };
 		C315731C28815A3900C911D0 /* AccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = C315731B28815A3900C911D0 /* AccessToken.swift */; };
+		C31573202881680700C911D0 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C315731F2881680700C911D0 /* UserViewController.swift */; };
 		C354B509287C0D4E000869CC /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C354B508287C0D4E000869CC /* LoginViewModel.swift */; };
 		C354B50B287C5CB2000869CC /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C354B50A287C5CB2000869CC /* AppRouter.swift */; };
 		C354B50F287D5A84000869CC /* UserClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C354B50E287D5A84000869CC /* UserClient.swift */; };
@@ -33,6 +34,7 @@
 		C315731328814F7600C911D0 /* LoginInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginInputView.swift; sourceTree = "<group>"; };
 		C31573192881543900C911D0 /* KeychainServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainServiceProtocol.swift; sourceTree = "<group>"; };
 		C315731B28815A3900C911D0 /* AccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessToken.swift; sourceTree = "<group>"; };
+		C315731F2881680700C911D0 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		C354B508287C0D4E000869CC /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		C354B50A287C5CB2000869CC /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		C354B50E287D5A84000869CC /* UserClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserClient.swift; sourceTree = "<group>"; };
@@ -97,13 +99,6 @@
 			path = Client;
 			sourceTree = "<group>";
 		};
-		C315731228814F1B00C911D0 /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "Recovered References";
-			sourceTree = "<group>";
-		};
 		C315731528814FBC00C911D0 /* Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -112,6 +107,30 @@
 				C315731B28815A3900C911D0 /* AccessToken.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		C315731D288167DC00C911D0 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				C315732128818E7100C911D0 /* Client */,
+				C315731E288167F300C911D0 /* View */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		C315731E288167F300C911D0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C315731F2881680700C911D0 /* UserViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C315732128818E7100C911D0 /* Client */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Client;
 			sourceTree = "<group>";
 		};
 		C3C39E832876E1AB003726A5 = {
@@ -139,6 +158,7 @@
 				C38A29742880531F00DD7EB9 /* AppDependencies.swift */,
 				C354B514287D9FCA000869CC /* ConstructViewsProtocol.swift */,
 				C315730E28806C0F00C911D0 /* Login */,
+				C315731D288167DC00C911D0 /* User */,
 				C3C39E982876E1AF003726A5 /* Assets.xcassets */,
 				C3C39E9A2876E1AF003726A5 /* LaunchScreen.storyboard */,
 				C3C39E9D2876E1AF003726A5 /* Info.plist */,
@@ -250,6 +270,7 @@
 				C315731C28815A3900C911D0 /* AccessToken.swift in Sources */,
 				C315731428814F7600C911D0 /* LoginInputView.swift in Sources */,
 				C38A29752880531F00DD7EB9 /* AppDependencies.swift in Sources */,
+				C31573202881680700C911D0 /* UserViewController.swift in Sources */,
 				C354B515287D9FCA000869CC /* ConstructViewsProtocol.swift in Sources */,
 				C3C39EA528772F30003726A5 /* LoginViewController.swift in Sources */,
 				C354B50B287C5CB2000869CC /* AppRouter.swift in Sources */,
