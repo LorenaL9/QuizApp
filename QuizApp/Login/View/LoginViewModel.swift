@@ -21,6 +21,10 @@ class LoginViewModel {
         password.count >= 6
     }
 
+    private var hasAccessToken: Bool {
+        keychainService.getAccessToken(key: AccessToken.user.rawValue) != nil
+    }
+
     init(router: AppRouterProtocol, userClient: UserClientProtocol, keychainService: KeychainServiceProtokol) {
         self.router = router
         self.userClient = userClient
@@ -48,11 +52,6 @@ class LoginViewModel {
                 print("ERROR: \(error)")
             }
         }
-    }
-
-    func getAccessToken() -> Bool {
-        let data = keychainService.getAccessToken(key: AccessToken.user.rawValue)
-        return data != nil
     }
 
     private func activateButton() {
