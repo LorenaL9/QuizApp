@@ -119,7 +119,6 @@
 			children = (
 				C3C39E8E2876E1AB003726A5 /* QuizApp */,
 				C3C39E8D2876E1AB003726A5 /* Products */,
-				C315731228814F1B00C911D0 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
