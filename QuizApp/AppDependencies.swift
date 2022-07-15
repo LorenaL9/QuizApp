@@ -1,3 +1,5 @@
+import Keychain
+
 class AppDependencies {
 
     lazy var userClient: UserClientProtocol = {
@@ -5,7 +7,9 @@ class AppDependencies {
     }()
 
     lazy var keychainService: KeychainServiceProtokol = {
-        KeychainService()
+        let keychain = Keychain()
+
+        return KeychainService(keychain: keychain)
     }()
 
 }

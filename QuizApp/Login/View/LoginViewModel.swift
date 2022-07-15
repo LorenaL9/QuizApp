@@ -51,7 +51,6 @@ class LoginViewModel {
     }
 
     func getAccessToken() -> Bool {
-//        keychainService.deleteAccessToken(key: AccessToken.user.rawValue)
         let data = keychainService.getAccessToken(key: AccessToken.user.rawValue)
         return data != nil
     }

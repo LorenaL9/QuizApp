@@ -5,25 +5,20 @@ class KeychainService: KeychainServiceProtokol {
 
     let keychain: Keychain!
 
-    init() {
-        keychain = Keychain()
+    init(keychain: Keychain) {
+        self.keychain = keychain
     }
 
     func saveAccessToken(token: String, key: String) {
-        let saved = keychain.save(token, forKey: key)
-        print("Token is saved: \(saved)")
+        keychain.save(token, forKey: key)
     }
 
     func getAccessToken(key: String) -> String? {
-        let value = keychain.value(forKey: key)
-
-        return value as? String
+        keychain.value(forKey: key) as? String
     }
 
     func deleteAccessToken(key: String) {
-        let deleted = keychain.remove(forKey: key)
-
-        print("Access token deleted: \(deleted)")
+        keychain.remove(forKey: key)
     }
 
 }
