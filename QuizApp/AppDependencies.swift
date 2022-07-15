@@ -4,4 +4,8 @@ class AppDependencies {
         UserClient()
     }()
 
+    lazy var keychainService: KeychainServiceProtokol = {
+        KeychainService()
+    }()
+
 }

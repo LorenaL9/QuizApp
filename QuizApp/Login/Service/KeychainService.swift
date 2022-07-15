@@ -1,39 +1,29 @@
 import UIKit
-import Security
+import Keychain
 
-class KeychainService {
+class KeychainService: KeychainServiceProtokol {
 
-    static func saveAccessToken(token: String, service: String) {
-        let keychainItemQuery = [
-            kSecValueData: token.data(using: .utf8)!,
-            kSecAttrService: service,
-            kSecClass: kSecClassGenericPassword
-        ] as CFDictionary
+    let keychain: Keychain!
 
-        let status = SecItemAdd(keychainItemQuery, nil)
-        print("Operation finished with status: \(status)")
+    init() {
+        keychain = Keychain()
     }
 
-    static func getAccessToken(service: String) -> Data? {
-        let query = [
-            kSecAttrService: service,
-            kSecClass: kSecClassGenericPassword,
-            kSecReturnData: true
-        ] as CFDictionary
-
-        var result: AnyObject?
-        SecItemCopyMatching(query, &result)
-
-        return (result as? Data)
+    func saveAccessToken(token: String, key: String) {
+        let saved = keychain.save(token, forKey: key)
+        print("Token is saved: \(saved)")
     }
 
-    static func delete(service: String) {
-        let query = [
-          kSecClass: kSecClassGenericPassword,
-          kSecAttrService: service
-        ] as CFDictionary
+    func getAccessToken(key: String) -> String? {
+        let value = keychain.value(forKey: key)
 
-        SecItemDelete(query)
+        return value as? String
+    }
+
+    func deleteAccessToken(key: String) {
+        let deleted = keychain.remove(forKey: key)
+
+        print("Access token deleted: \(deleted)")
     }
 
 }

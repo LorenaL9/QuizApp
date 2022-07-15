@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		C315731428814F7600C911D0 /* LoginInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C315731328814F7600C911D0 /* LoginInputView.swift */; };
+		C3157318288151F900C911D0 /* Keychain in Frameworks */ = {isa = PBXBuildFile; productRef = C3157317288151F900C911D0 /* Keychain */; };
+		C315731A2881543900C911D0 /* KeychainServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31573192881543900C911D0 /* KeychainServiceProtocol.swift */; };
+		C315731C28815A3900C911D0 /* AccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = C315731B28815A3900C911D0 /* AccessToken.swift */; };
 		C354B509287C0D4E000869CC /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C354B508287C0D4E000869CC /* LoginViewModel.swift */; };
 		C354B50B287C5CB2000869CC /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C354B50A287C5CB2000869CC /* AppRouter.swift */; };
 		C354B50F287D5A84000869CC /* UserClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C354B50E287D5A84000869CC /* UserClient.swift */; };
@@ -28,6 +31,8 @@
 
 /* Begin PBXFileReference section */
 		C315731328814F7600C911D0 /* LoginInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginInputView.swift; sourceTree = "<group>"; };
+		C31573192881543900C911D0 /* KeychainServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainServiceProtocol.swift; sourceTree = "<group>"; };
+		C315731B28815A3900C911D0 /* AccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessToken.swift; sourceTree = "<group>"; };
 		C354B508287C0D4E000869CC /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		C354B50A287C5CB2000869CC /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		C354B50E287D5A84000869CC /* UserClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserClient.swift; sourceTree = "<group>"; };
@@ -52,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3157318288151F900C911D0 /* Keychain in Frameworks */,
 				C3C39EA8287811E8003726A5 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -102,6 +108,8 @@
 			isa = PBXGroup;
 			children = (
 				C38A296E288016C300DD7EB9 /* KeychainService.swift */,
+				C31573192881543900C911D0 /* KeychainServiceProtocol.swift */,
+				C315731B28815A3900C911D0 /* AccessToken.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -158,6 +166,7 @@
 			name = QuizApp;
 			packageProductDependencies = (
 				C3C39EA7287811E8003726A5 /* SnapKit */,
+				C3157317288151F900C911D0 /* Keychain */,
 			);
 			productName = QuizApp;
 			productReference = C3C39E8C2876E1AB003726A5 /* QuizApp.app */;
@@ -189,6 +198,7 @@
 			mainGroup = C3C39E832876E1AB003726A5;
 			packageReferences = (
 				C3C39EA6287811E8003726A5 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				C3157316288151F900C911D0 /* XCRemoteSwiftPackageReference "Keychain.swift" */,
 			);
 			productRefGroup = C3C39E8D2876E1AB003726A5 /* Products */;
 			projectDirPath = "";
@@ -238,6 +248,7 @@
 			files = (
 				C354B509287C0D4E000869CC /* LoginViewModel.swift in Sources */,
 				C354B511287D6189000869CC /* LoginResponse.swift in Sources */,
+				C315731C28815A3900C911D0 /* AccessToken.swift in Sources */,
 				C315731428814F7600C911D0 /* LoginInputView.swift in Sources */,
 				C38A29752880531F00DD7EB9 /* AppDependencies.swift in Sources */,
 				C354B515287D9FCA000869CC /* ConstructViewsProtocol.swift in Sources */,
@@ -245,6 +256,7 @@
 				C354B50B287C5CB2000869CC /* AppRouter.swift in Sources */,
 				C38A296F288016C300DD7EB9 /* KeychainService.swift in Sources */,
 				C354B513287D9C0E000869CC /* CustomTextFieldType.swift in Sources */,
+				C315731A2881543900C911D0 /* KeychainServiceProtocol.swift in Sources */,
 				C3C39E902876E1AB003726A5 /* AppDelegate.swift in Sources */,
 				C3C39E922876E1AB003726A5 /* SceneDelegate.swift in Sources */,
 				C354B50F287D5A84000869CC /* UserClient.swift in Sources */,
@@ -457,6 +469,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		C3157316288151F900C911D0 /* XCRemoteSwiftPackageReference "Keychain.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/GroupeMINASTE/Keychain.swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		C3C39EA6287811E8003726A5 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -468,6 +488,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		C3157317288151F900C911D0 /* Keychain */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C3157316288151F900C911D0 /* XCRemoteSwiftPackageReference "Keychain.swift" */;
+			productName = Keychain;
+		};
 		C3C39EA7287811E8003726A5 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C3C39EA6287811E8003726A5 /* XCRemoteSwiftPackageReference "SnapKit" */;
