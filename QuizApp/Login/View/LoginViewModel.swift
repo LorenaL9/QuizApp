@@ -9,7 +9,7 @@ class LoginViewModel {
     private var password: String = ""
     private var router: AppRouterProtocol!
     private var userClient: UserClientProtocol!
-    private var keychainService: KeychainServiceProtokol!
+    private var keychainService: KeychainServiceProtocol!
 
     private var isValidEmail: Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
@@ -21,7 +21,7 @@ class LoginViewModel {
         password.count >= 6
     }
 
-    init(router: AppRouterProtocol, userClient: UserClientProtocol, keychainService: KeychainServiceProtokol) {
+    init(router: AppRouterProtocol, userClient: UserClientProtocol, keychainService: KeychainServiceProtocol) {
         self.router = router
         self.userClient = userClient
         self.keychainService = keychainService
@@ -55,9 +55,11 @@ class LoginViewModel {
             let token: String = keychainService.getAccessToken(key: AccessToken.user.rawValue)
         else { return false }
 
-        guard
+        do {
             try await userClient.checkAccessToken(data: token)
-        else { return false }
+        } catch {
+            return false
+        }
 
         return true
     }

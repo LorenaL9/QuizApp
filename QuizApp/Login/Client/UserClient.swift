@@ -36,7 +36,7 @@ class UserClient: UserClientProtocol {
         return result
     }
 
-    func checkAccessToken(data: String) async throws -> Bool {
+    func checkAccessToken(data: String) async throws {
         guard
             let url = URL(string: "https://five-ios-quiz-app.herokuapp.com/api/v1/check/")
         else {
@@ -56,8 +56,6 @@ class UserClient: UserClientProtocol {
         else {
             throw RequestError.clientError
         }
-
-        return true
     }
 
 }

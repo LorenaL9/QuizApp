@@ -12,6 +12,10 @@
 		C315731A2881543900C911D0 /* KeychainServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31573192881543900C911D0 /* KeychainServiceProtocol.swift */; };
 		C315731C28815A3900C911D0 /* AccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = C315731B28815A3900C911D0 /* AccessToken.swift */; };
 		C31573202881680700C911D0 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C315731F2881680700C911D0 /* UserViewController.swift */; };
+		C315732428819CA700C911D0 /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C315732328819CA700C911D0 /* LoginUseCase.swift */; };
+		C31573292881A19A00C911D0 /* LoginDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31573282881A19A00C911D0 /* LoginDataSource.swift */; };
+		C315732B2881A1D200C911D0 /* LoginData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C315732A2881A1D200C911D0 /* LoginData.swift */; };
+		C315732D2881B02500C911D0 /* TokenError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C315732C2881B02500C911D0 /* TokenError.swift */; };
 		C354B509287C0D4E000869CC /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C354B508287C0D4E000869CC /* LoginViewModel.swift */; };
 		C354B50B287C5CB2000869CC /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C354B50A287C5CB2000869CC /* AppRouter.swift */; };
 		C354B50F287D5A84000869CC /* UserClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C354B50E287D5A84000869CC /* UserClient.swift */; };
@@ -35,6 +39,10 @@
 		C31573192881543900C911D0 /* KeychainServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainServiceProtocol.swift; sourceTree = "<group>"; };
 		C315731B28815A3900C911D0 /* AccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessToken.swift; sourceTree = "<group>"; };
 		C315731F2881680700C911D0 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		C315732328819CA700C911D0 /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
+		C31573282881A19A00C911D0 /* LoginDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDataSource.swift; sourceTree = "<group>"; };
+		C315732A2881A1D200C911D0 /* LoginData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginData.swift; sourceTree = "<group>"; };
+		C315732C2881B02500C911D0 /* TokenError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenError.swift; sourceTree = "<group>"; };
 		C354B508287C0D4E000869CC /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		C354B50A287C5CB2000869CC /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		C354B50E287D5A84000869CC /* UserClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserClient.swift; sourceTree = "<group>"; };
@@ -70,6 +78,8 @@
 		C315730E28806C0F00C911D0 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				C31573252881A15300C911D0 /* DataSource */,
+				C315732228819BCC00C911D0 /* UseCase */,
 				C315731528814FBC00C911D0 /* Service */,
 				C315731028806C6600C911D0 /* Client */,
 				C315730F28806C4100C911D0 /* View */,
@@ -91,10 +101,9 @@
 		C315731028806C6600C911D0 /* Client */ = {
 			isa = PBXGroup;
 			children = (
+				C31573262881A16F00C911D0 /* Models */,
 				C361D7BC287F049400C8C509 /* UserClientProtocol.swift */,
 				C354B50E287D5A84000869CC /* UserClient.swift */,
-				C361D7BA287EFF1300C8C509 /* RequestError.swift */,
-				C354B510287D6189000869CC /* LoginResponse.swift */,
 			);
 			path = Client;
 			sourceTree = "<group>";
@@ -131,6 +140,41 @@
 			children = (
 			);
 			path = Client;
+			sourceTree = "<group>";
+		};
+		C315732228819BCC00C911D0 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				C315732328819CA700C911D0 /* LoginUseCase.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		C31573252881A15300C911D0 /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				C31573272881A18300C911D0 /* Models */,
+				C31573282881A19A00C911D0 /* LoginDataSource.swift */,
+			);
+			path = DataSource;
+			sourceTree = "<group>";
+		};
+		C31573262881A16F00C911D0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C361D7BA287EFF1300C8C509 /* RequestError.swift */,
+				C354B510287D6189000869CC /* LoginResponse.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C31573272881A18300C911D0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C315732A2881A1D200C911D0 /* LoginData.swift */,
+				C315732C2881B02500C911D0 /* TokenError.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		C3C39E832876E1AB003726A5 = {
@@ -266,22 +310,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				C354B509287C0D4E000869CC /* LoginViewModel.swift in Sources */,
+				C315732B2881A1D200C911D0 /* LoginData.swift in Sources */,
 				C354B511287D6189000869CC /* LoginResponse.swift in Sources */,
 				C315731C28815A3900C911D0 /* AccessToken.swift in Sources */,
 				C315731428814F7600C911D0 /* LoginInputView.swift in Sources */,
 				C38A29752880531F00DD7EB9 /* AppDependencies.swift in Sources */,
 				C31573202881680700C911D0 /* UserViewController.swift in Sources */,
 				C354B515287D9FCA000869CC /* ConstructViewsProtocol.swift in Sources */,
+				C31573292881A19A00C911D0 /* LoginDataSource.swift in Sources */,
 				C3C39EA528772F30003726A5 /* LoginViewController.swift in Sources */,
 				C354B50B287C5CB2000869CC /* AppRouter.swift in Sources */,
 				C38A296F288016C300DD7EB9 /* KeychainService.swift in Sources */,
 				C354B513287D9C0E000869CC /* CustomTextFieldType.swift in Sources */,
 				C315731A2881543900C911D0 /* KeychainServiceProtocol.swift in Sources */,
+				C315732D2881B02500C911D0 /* TokenError.swift in Sources */,
 				C3C39E902876E1AB003726A5 /* AppDelegate.swift in Sources */,
 				C3C39E922876E1AB003726A5 /* SceneDelegate.swift in Sources */,
 				C354B50F287D5A84000869CC /* UserClient.swift in Sources */,
 				C361D7BB287EFF1300C8C509 /* RequestError.swift in Sources */,
 				C361D7BD287F049400C8C509 /* UserClientProtocol.swift in Sources */,
+				C315732428819CA700C911D0 /* LoginUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,7 +6,7 @@ class AppDependencies {
         UserClient()
     }()
 
-    lazy var keychainService: KeychainServiceProtokol = {
+    lazy var keychainService: KeychainServiceProtocol = {
         let keychain = Keychain()
 
         return KeychainService(keychain: keychain)
