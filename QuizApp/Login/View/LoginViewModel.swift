@@ -9,6 +9,7 @@ class LoginViewModel {
     private var password: String = ""
     private var router: AppRouterProtocol!
     private var userClient: UserClientProtocol!
+    private var keychainService: KeychainServiceProtokol!
 
     private var isValidEmail: Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
@@ -20,9 +21,14 @@ class LoginViewModel {
         password.count >= 6
     }
 
-    init(router: AppRouterProtocol, userClient: UserClientProtocol) {
+    private var hasAccessToken: Bool {
+        keychainService.getAccessToken(key: AccessToken.user.rawValue) != nil
+    }
+
+    init(router: AppRouterProtocol, userClient: UserClientProtocol, keychainService: KeychainServiceProtokol) {
         self.router = router
         self.userClient = userClient
+        self.keychainService = keychainService
     }
 
     func emailChanged(newEmail: String) {
@@ -40,7 +46,7 @@ class LoginViewModel {
         Task {
             do {
                 let token = try await userClient.fetchAccessToken(password: password, username: email)
-                print("\(token)")
+                keychainService.saveAccessToken(token: token.accessToken, key: AccessToken.user.rawValue)
             } catch {
                 errorMessage = "Incorrect email or password"
                 print("ERROR: \(error)")
