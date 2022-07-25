@@ -40,7 +40,7 @@ class LoginViewModel {
         Task {
             do {
                 try await loginUseCase.login(password: password, username: email)
-                router.showUserViewController()
+                router.showHomePage()
             } catch {
                 errorMessage = "Incorrect email or password"
                 print(error)

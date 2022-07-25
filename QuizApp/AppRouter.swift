@@ -4,7 +4,7 @@ protocol AppRouterProtocol {
 
     func showLogIn()
 
-    func showUserViewController()
+    func showHomePage()
 
 }
 
@@ -26,11 +26,20 @@ class AppRouter: AppRouterProtocol {
         navigationController.navigationBar.isHidden = true
     }
 
-    func showUserViewController() {
-        let userViewController = UserViewController()
+    func showHomePage() {
+        let quizViewController = QuizViewController()
+        quizViewController.tabBarItem = UITabBarItem(title: "Quiz", image: UIImage(named: "quizSelected"), tag: 0)
 
-        navigationController.pushViewController(userViewController, animated: true)
-        navigationController.navigationBar.isHidden = true
+        let userViewModel = UserViewModel(router: self, userUseCase: appDependencies.userUseCase)
+        let userViewController = UserViewController(viewModel: userViewModel)
+        userViewController.tabBarItem = UITabBarItem(title: "Settings", image: UIImage(named: "Settings"), tag: 1)
+
+        let tabBarController = UITabBarController()
+        tabBarController.viewControllers = [quizViewController, userViewController]
+        tabBarController.tabBar.backgroundColor = .white
+        tabBarController.tabBar.tintColor = UIColor(red: 0.154, green: 0.185, blue: 0.463, alpha: 1)
+
+        navigationController.pushViewController(tabBarController, animated: false)
     }
 
 }

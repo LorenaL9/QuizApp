@@ -1,0 +1,5 @@
+protocol UserUseCaseProtocol {
+
+    func logout()
+
+}

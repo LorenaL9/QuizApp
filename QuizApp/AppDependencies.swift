@@ -20,4 +20,8 @@ class AppDependencies {
         LoginUseCase(loginDataSource: loginDataSource)
     }()
 
+    lazy var userUseCase: UserUseCaseProtocol = {
+        UserUseCase(keychainService: keychainService)
+    }()
+
 }

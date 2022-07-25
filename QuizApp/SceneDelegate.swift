@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         Task {
             do {
                 try await appDependencies.loginUseCase.accessTokenIsValid()
-                router.showUserViewController()
+                router.showHomePage()
             } catch {
                 router.showLogIn()
             }

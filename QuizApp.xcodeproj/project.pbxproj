@@ -17,6 +17,10 @@
 		C315732D2881B02500C911D0 /* TokenError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C315732C2881B02500C911D0 /* TokenError.swift */; };
 		C315732F2881B3B800C911D0 /* LoginDataSourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C315732E2881B3B800C911D0 /* LoginDataSourceProtocol.swift */; };
 		C31573312881B92800C911D0 /* LoginUseCaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31573302881B92800C911D0 /* LoginUseCaseProtocol.swift */; };
+		C3157334288EBBAE00C911D0 /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3157333288EBBAE00C911D0 /* QuizViewController.swift */; };
+		C3238AF1288ECE8F005A8DEC /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3238AF0288ECE8F005A8DEC /* UserViewModel.swift */; };
+		C3238AF4288ED0C6005A8DEC /* UserUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3238AF3288ED0C6005A8DEC /* UserUseCase.swift */; };
+		C3238AF6288ED0DA005A8DEC /* UserUseCaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3238AF5288ED0DA005A8DEC /* UserUseCaseProtocol.swift */; };
 		C354B509287C0D4E000869CC /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C354B508287C0D4E000869CC /* LoginViewModel.swift */; };
 		C354B50B287C5CB2000869CC /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C354B50A287C5CB2000869CC /* AppRouter.swift */; };
 		C354B50F287D5A84000869CC /* UserClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C354B50E287D5A84000869CC /* UserClient.swift */; };
@@ -45,6 +49,10 @@
 		C315732C2881B02500C911D0 /* TokenError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenError.swift; sourceTree = "<group>"; };
 		C315732E2881B3B800C911D0 /* LoginDataSourceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDataSourceProtocol.swift; sourceTree = "<group>"; };
 		C31573302881B92800C911D0 /* LoginUseCaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCaseProtocol.swift; sourceTree = "<group>"; };
+		C3157333288EBBAE00C911D0 /* QuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewController.swift; sourceTree = "<group>"; };
+		C3238AF0288ECE8F005A8DEC /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		C3238AF3288ED0C6005A8DEC /* UserUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUseCase.swift; sourceTree = "<group>"; };
+		C3238AF5288ED0DA005A8DEC /* UserUseCaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUseCaseProtocol.swift; sourceTree = "<group>"; };
 		C354B508287C0D4E000869CC /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		C354B50A287C5CB2000869CC /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		C354B50E287D5A84000869CC /* UserClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserClient.swift; sourceTree = "<group>"; };
@@ -123,6 +131,7 @@
 		C315731D288167DC00C911D0 /* User */ = {
 			isa = PBXGroup;
 			children = (
+				C3238AF2288ED0B1005A8DEC /* UseCase */,
 				C315732128818E7100C911D0 /* Client */,
 				C315731E288167F300C911D0 /* View */,
 			);
@@ -133,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				C315731F2881680700C911D0 /* UserViewController.swift */,
+				C3238AF0288ECE8F005A8DEC /* UserViewModel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -180,21 +190,21 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		C315731228814F1B00C911D0 /* Recovered References */ = {
+		C3157332288EBB8000C911D0 /* Quiz */ = {
 			isa = PBXGroup;
 			children = (
+				C3157333288EBBAE00C911D0 /* QuizViewController.swift */,
 			);
-			name = "Recovered References";
+			path = Quiz;
 			sourceTree = "<group>";
 		};
-		C315731528814FBC00C911D0 /* Service */ = {
+		C3238AF2288ED0B1005A8DEC /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
-				C38A296E288016C300DD7EB9 /* KeychainService.swift */,
-				C31573192881543900C911D0 /* KeychainServiceProtocol.swift */,
-				C315731B28815A3900C911D0 /* AccessToken.swift */,
+				C3238AF3288ED0C6005A8DEC /* UserUseCase.swift */,
+				C3238AF5288ED0DA005A8DEC /* UserUseCaseProtocol.swift */,
 			);
-			path = Service;
+			path = UseCase;
 			sourceTree = "<group>";
 		};
 		C3C39E832876E1AB003726A5 = {
@@ -223,6 +233,7 @@
 				C354B514287D9FCA000869CC /* ConstructViewsProtocol.swift */,
 				C315730E28806C0F00C911D0 /* Login */,
 				C315731D288167DC00C911D0 /* User */,
+				C3157332288EBB8000C911D0 /* Quiz */,
 				C3C39E982876E1AF003726A5 /* Assets.xcassets */,
 				C3C39E9A2876E1AF003726A5 /* LaunchScreen.storyboard */,
 				C3C39E9D2876E1AF003726A5 /* Info.plist */,
@@ -329,11 +340,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3238AF6288ED0DA005A8DEC /* UserUseCaseProtocol.swift in Sources */,
 				C354B509287C0D4E000869CC /* LoginViewModel.swift in Sources */,
+				C3238AF1288ECE8F005A8DEC /* UserViewModel.swift in Sources */,
 				C31573312881B92800C911D0 /* LoginUseCaseProtocol.swift in Sources */,
 				C354B511287D6189000869CC /* LoginResponse.swift in Sources */,
 				C315731C28815A3900C911D0 /* AccessToken.swift in Sources */,
 				C315731428814F7600C911D0 /* LoginInputView.swift in Sources */,
+				C3238AF4288ED0C6005A8DEC /* UserUseCase.swift in Sources */,
 				C38A29752880531F00DD7EB9 /* AppDependencies.swift in Sources */,
 				C31573202881680700C911D0 /* UserViewController.swift in Sources */,
 				C354B515287D9FCA000869CC /* ConstructViewsProtocol.swift in Sources */,
@@ -349,6 +363,7 @@
 				C3C39E922876E1AB003726A5 /* SceneDelegate.swift in Sources */,
 				C354B50F287D5A84000869CC /* UserClient.swift in Sources */,
 				C361D7BB287EFF1300C8C509 /* RequestError.swift in Sources */,
+				C3157334288EBBAE00C911D0 /* QuizViewController.swift in Sources */,
 				C361D7BD287F049400C8C509 /* UserClientProtocol.swift in Sources */,
 				C315732428819CA700C911D0 /* LoginUseCase.swift in Sources */,
 			);
