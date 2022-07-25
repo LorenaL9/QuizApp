@@ -1,23 +1,37 @@
 import Foundation
 
-class LogindataSource {
+class LogindataSource: LoginDataSourceProtocol {
 
     let userClient: UserClientProtocol!
+    let keychainService: KeychainServiceProtocol!
 
-    init(userClient: UserClientProtocol) {
+    init(userClient: UserClientProtocol, keychainService: KeychainServiceProtocol) {
         self.userClient = userClient
+        self.keychainService = keychainService
     }
 
-    func getAccessToken(password: String, username: String) async throws -> LoginData {
+    func login(password: String, username: String) async throws {
         guard
             let token = try? await userClient.fetchAccessToken(password: password, username: username)
-        else { throw TokenError.noAccessToken}
+        else {
+            throw TokenError.noAccessToken
+        }
 
-        return LoginData(accessToken: token.accessToken)
+        keychainService.saveAccessToken(token: token.accessToken, key: AccessToken.user.rawValue)
     }
 
-    func accessTokenIsValid(token: String) async throws {
-        try await userClient.checkAccessToken(data: token)
+    func accessTokenIsValid() async throws {
+        guard
+            let token: String = keychainService.getAccessToken(key: AccessToken.user.rawValue)
+        else {
+            throw TokenError.noAccessToken
+        }
+
+        do {
+            try await userClient.checkAccessToken(data: token)
+        } catch {
+            throw TokenError.noValidAccessToken
+        }
     }
 
 }
