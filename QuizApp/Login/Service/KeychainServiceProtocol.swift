@@ -1,4 +1,4 @@
-protocol KeychainServiceProtokol {
+protocol KeychainServiceProtocol {
 
     func saveAccessToken(token: String, key: String)
 

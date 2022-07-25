@@ -12,13 +12,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
         let navigationController = UINavigationController()
-        let router = AppRouter(navigationController: navigationController)
+        let appDependencies = AppDependencies()
+        let router = AppRouter(navigationController: navigationController, appDependencies: appDependencies)
 
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = navigationController
-        window?.makeKeyAndVisible()
 
-        router.showLogIn()
+        Task {
+            do {
+                try await appDependencies.loginUseCase.accessTokenIsValid()
+                router.showUserViewController()
+            } catch {
+                router.showLogIn()
+            }
+            window?.rootViewController = navigationController
+            window?.makeKeyAndVisible()
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

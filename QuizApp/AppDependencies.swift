@@ -6,10 +6,18 @@ class AppDependencies {
         UserClient()
     }()
 
-    lazy var keychainService: KeychainServiceProtokol = {
+    lazy var keychainService: KeychainServiceProtocol = {
         let keychain = Keychain()
 
         return KeychainService(keychain: keychain)
+    }()
+
+    lazy var loginDataSource: LoginDataSourceProtocol = {
+        LogindataSource(userClient: userClient, keychainService: keychainService)
+    }()
+
+    lazy var loginUseCase: LoginUseCaseProtocol = {
+        LoginUseCase(loginDataSource: loginDataSource)
     }()
 
 }

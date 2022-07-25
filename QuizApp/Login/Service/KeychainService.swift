@@ -1,7 +1,7 @@
 import UIKit
 import Keychain
 
-class KeychainService: KeychainServiceProtokol {
+class KeychainService: KeychainServiceProtocol {
 
     let keychain: Keychain!
 
